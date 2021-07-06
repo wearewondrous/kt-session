@@ -1,0 +1,7 @@
+# Source: https://www.drupal.org/docs/creating-custom-modules/step-by-step-tutorial-hello-world/add-a-menu-link
+kt_session.newpage:
+  title: 'KT Session Stuff'
+  description: 'Link to the page kt_session created'
+  route_name: kt_session.content
+  weight: 10
+  menu_name: main
