@@ -1,0 +1,104 @@
+{
+    "name": "drupal-composer/drupal-project",
+    "description": "Project template for Drupal 8 projects with composer",
+    "type": "project",
+    "license": "GPL-2.0+",
+    "authors": [
+        {
+            "name": "WONDROUS LLC",
+            "role": ""
+        }
+    ],
+    "config": {
+        "prefered-install": "dist",
+        "optimize-autoloader": true,
+        "process-timeout": 1200,
+        "platform": {
+            "php": "7.3"
+        },
+        "sort-packages": true
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8",
+            "exclude": ["drupal/views_selective_filters"]
+        },
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/geerlingguy/drupal-vm/issues",
+        "source": "https://github.com/geerlingguy/drupal-vm",
+        "docs": "http://docs.drupalvm.com"
+    },
+    "require": {
+        "drupal/pathauto": "^1.8",
+        "drupal/redis": "~1.0",
+        "drush/drush": "^10.0",
+        "wearewondrous/psh-toolbelt": "^2.1"
+    },
+    "require-dev": {
+        "drupal/console": "~1.0",
+        "drupal/devel": "~2.0",
+        "drupal/stage_file_proxy": "~1.0",
+        "drupal/twig_xdebug": "~1.0",
+        "geerlingguy/drupal-vm": "^5.0"
+    },
+    "conflict": {
+        "drupal/drupal": "*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {},
+    "extra": {
+        "installer-types": [
+            "npm-asset",
+            "bower-asset"
+        ],
+        "installer-paths": {
+            "web/core": [
+                "type:drupal-core"
+            ],
+            "web/libraries/Sortable": [
+                "npm-asset/sortablejs"
+            ],
+            "web/libraries/{$name}": [
+                "type:npm-asset",
+                "type:bower-asset",
+                "type:drupal-library"
+            ],
+            "web/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "web/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "web/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "drush/Commands/contrib/{$name}": [
+                "type:drupal-drush"
+            ]
+        },
+        "patches": {
+            "drupal/core": {
+                "Add version to core package.json": "https://s3-eu-west-1.amazonaws.com/patches.wondrous.ch/files/package_json_version.patch",
+                "views attachment dont inherit exposed filters": "https://www.drupal.org/files/issues/attachments_on_views-2171389-23_0.patch"
+            },
+            "drupal/ctools": {
+                "auto submit for exposed filters": "https://www.drupal.org/files/issues/2475595-ctools-autocomplete-fix-24.patch"
+            }
+        },
+        "drupal-scaffold": {
+            "locations": {
+                "web-root": "web/"
+            },
+            "file-mapping": {
+                "[web-root]/robots.txt": false
+            }
+        }
+    }
+}

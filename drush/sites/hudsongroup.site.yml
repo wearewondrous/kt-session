@@ -1,0 +1,9 @@
+local:
+  root: '/var/www/drupalvm/web'
+  uri: 'www.hudsongroup.wndrs'
+  host: 'www.hudsongroup.wndrs'
+  user: 'vagrant'
+  ssh:
+    options: '-o PasswordAuthentication=no -i $HOME/.vagrant.d/insecure_private_key'
+  paths:
+    drush-script: '/var/www/drupalvm/vendor/bin/drush'

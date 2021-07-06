@@ -1,0 +1,96 @@
+{
+  "name": "learner-kit",
+  "version": "1.1.0",
+  "description": "Learner Kit",
+  "author": "WONDROUS LTD <hello@wondrous.ch> (https://www.wearewondrous.com)",
+  "license": "UNLICENCED",
+  "private": true,
+  "workspaces": [
+    "web/core"
+  ],
+  "scripts": {
+    "composer": "composer --no-ansi --no-interaction install --no-progress --prefer-dist --optimize-autoloader",
+    "php-coding-style-setup": "./vendor/bin/phpcs --config-set installed_paths web/modules/contrib/coder/coder_sniffer/",
+    "drupal-code-sniffer": "./vendor/bin/phpcs --standard=Drupal --extensions='php,module,inc,install,test,profile,theme,css,info,txt,md' web/themes/custom web/modules/custom",
+    "drupal-code-sniffer-best-practices": "./vendor/bin/phpcs --standard=DrupalPractice --extensions='php,module,inc,install,test,profile,theme,css,info,txt,md' web/themes/custom web/modules/custom",
+    "drupal-code-sniffer-fixer": "./vendor/bin/phpcbf --standard=Drupal --extensions='php,module,inc,install,test,profile,theme,css,info,txt,md' web/themes/custom web/modules/custom",
+    "php-mess-detector": "./vendor/bin/phpmd 'web/themes/custom,web/modules/custom' text ./phpmd.xml --suffixes php,theme,module,inc,install",
+    "project-local-drush": "cd web && ../vendor/bin/drush",
+    "gulp": "./node_modules/.bin/gulp",
+    "watch": "./node_modules/.bin/gulp watch",
+    "d": "yarn run project-local-drush",
+    "ld": "yarn run d @learner-kit.local",
+    "up": "./vendor/bin/psh-toolbelt update:from-remote",
+    "setup": "yarn composer && yarn && platform drush-aliases -r && vagrant up && yarn up --branch=master --db && yarn gulp"
+  },
+  "husky": {
+    "hooks": {
+      "post-checkout": "./git-hooks/post-checkout.sh",
+      "post-merge": "./git-hooks/post-merge.sh"
+    }
+  },
+  "dependencies": {
+    "@frctl/fractal": "^1.2.1",
+    "@wearewondrous/fractal-config-helper": "^1.1.13",
+    "@wearewondrous/fractal-twig-drupal-adapter": "1.3.3",
+    "TimelineJS3": "https://github.com/NUKnightLab/TimelineJS3",
+    "autoprefixer": "^9.7.4",
+    "background-blur": "^0.1.3",
+    "cssnano": "^4.1.10",
+    "faker": "^4.1.0",
+    "foundation-sites": "6.6.1",
+    "gsap": "^2.1.2",
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-eslint": "^6.0.0",
+    "gulp-gzip": "^1.4.2",
+    "gulp-iconfont": "^10.0.3",
+    "gulp-iconfont-css": "^3.0.0",
+    "gulp-if": "^3.0.0",
+    "gulp-image": "^6.1.0",
+    "gulp-imagemin": "^7.1.0",
+    "gulp-include": "^2.4.1",
+    "gulp-postcss": "^8.0.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-reporter": "^2.10.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-stylefmt": "^1.1.0",
+    "gulp-stylelint": "^13.0.0",
+    "gulp-svgmin": "^2.2.0",
+    "gulp-uglify": "^3.0.2",
+    "hamburgers": "^1.1.3",
+    "iframe-resizer": "^4.2.10",
+    "imagesloaded": "^4.1.4",
+    "jquery": "^3.4.1",
+    "jquery-once": "^2.2.3",
+    "jquery.mmenu": "^7.3.3",
+    "lity": "^2.4.0",
+    "node-sass": "^4.13.1",
+    "owl.carousel": "^2.3.4",
+    "photoswipe": "^4.1.3",
+    "plyr": "^3.5.10",
+    "postcss-reporter": "^6.0.1",
+    "pym.js": "nprapps/pym.js",
+    "rename": "^1.0.4",
+    "scrollmagic": "^2.0.7",
+    "select2": "^4.0.13",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "husky": "^4.2.3",
+    "stylelint-config-sass-guidelines": "^7.0.0"
+  },
+  "engines": {
+    "node": ">= 10.0.0",
+    "yarn": ">= 1.10.1 <2.0.0"
+  },
+  "browserslist": [
+    "last 2 version",
+    "safari 9",
+    "ie 11",
+    "opera 12.1",
+    "ios 9",
+    "android 4"
+  ]
+}

@@ -1,0 +1,85 @@
+# Composer settings
+build_composer_project: false
+drupal_build_composer_project: false
+composer_global_packages: []
+
+#drush alias fix
+configure_drush_aliases: false
+
+# Base settings for vagrant box
+vagrant_hostname: learner-kit.wndrs
+vagrant_machine_name: learner-kit
+vagrant_ip: 192.168.141.183
+vagrant_box: geerlingguy/ubuntu1804
+
+# Correct folders
+drupal_composer_install_dir: "/var/www/drupalvm"
+
+# webserver
+drupalvm_webserver: nginx
+
+#solr
+#solr_version: "6.4.1"
+
+post_provision_scripts:
+  - "{{ config_dir }}/../scripts/vagrant/logging.sh"
+
+# Use mariaDB instead of mysql
+mysql_packages:
+  - mariadb-client
+  - mariadb-server
+  - python-mysqldb
+
+#php
+php_version: "7.3"
+php_memory_limit: "256M"
+
+# xdebug
+php_xdebug_default_enable: 1
+php_xdebug_coverage_enable: 0
+php_xdebug_max_nesting_level: 512
+php_xdebug_idekey: PHPSTORM
+php_xdebug_version: 2.7.0
+
+# Site install false
+drupal_install_site: false
+drupal_enable_modules: []
+
+installed_extras:
+ # - adminer
+ # - blackfire
+ # - drupalconsole
+ # - memcached
+ # - newrelic
+ # - nodejs
+ # - ruby
+ # - selenium
+ # - varnish
+ # - xhprof
+ # - drush
+ # - solr
+ - redis
+ - php-redis
+ - mailhog
+ - xdebug
+ - pimpmylog
+
+extra_packages:
+  - imagemagick
+  - jpegoptim
+  - optipng
+
+nginx_hosts:
+  - server_name: "{{ drupal_domain }} www.{{ drupal_domain }}"
+    root: "{{ drupal_core_path }}"
+    is_php: true
+    extra_parameters: |
+      fastcgi_buffers 16 16k;
+      fastcgi_buffer_size 32k;
+  - server_name: "pimpmylog.{{ vagrant_hostname }}"
+    root: "{{ pimpmylog_install_dir }}"
+    is_php: true
+
+  - server_name: "{{ vagrant_ip }} dashboard.{{ vagrant_hostname }}"
+    root: "{{ dashboard_install_dir }}"
+    is_php: true

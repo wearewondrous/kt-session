@@ -1,0 +1,8 @@
+drupal:
+  hash_salt: 5616d2e84b6c8f4bb7d0543e67a93b56a8f62806
+
+drupal_vm:
+  host: learner-kit.wndrs
+
+drush:
+  alias_group: learner-kit
