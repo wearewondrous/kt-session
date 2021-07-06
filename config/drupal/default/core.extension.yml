@@ -21,6 +21,7 @@ module:
   help: 0
   history: 0
   image: 0
+  kt_session: 0
   link: 0
   menu_link_content: 0
   menu_ui: 0
@@ -38,6 +39,7 @@ module:
   text: 0
   toolbar: 0
   tour: 0
+  update: 0
   user: 0
   views_ui: 0
   views: 10
