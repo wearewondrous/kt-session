@@ -1,8 +1,8 @@
 country:
-  default: CH
+  default: BD
 first_day: 0
 timezone:
-  default: Europe/Warsaw
+  default: Asia/Dhaka
   user:
     configurable: true
     warn: false
