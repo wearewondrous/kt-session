@@ -15,7 +15,7 @@ use Drupal\Core\Form\FormStateInterface;
  */
 function kt_session_form_alter(&$form, FormStateInterface $form_state, string $form_id) : void {
   if (isset($form['type']) && $form['type']['#value'] . '_node_settings' == $form_id) {
-    $upload_enabled_types = \Drupal::config('mymodule.settings')
+    $upload_enabled_types = \Drupal::config('kt_session.settings')
       ->get('upload_enabled_types');
     $form['workflow']['upload_' . $form['type']['#value']] = [
       '#type' => 'radios',
@@ -28,6 +28,6 @@ function kt_session_form_alter(&$form, FormStateInterface $form_state, string $f
     ];
 
     // Add a custom submit handler to save the array of types back to the config file.
-    $form['actions']['submit']['#submit'][] = 'mymodule_upload_enabled_types_submit';
+    $form['actions']['submit']['#submit'][] = 'kt_session_upload_enabled_types_submit';
   }
 }
