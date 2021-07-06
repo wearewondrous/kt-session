@@ -1,0 +1,5 @@
+name: KT Session
+type: module
+description: Demonstration of Custom Module development
+core_version_requirement: '^8 || ^9'
+package: Welldev
