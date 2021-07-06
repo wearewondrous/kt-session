@@ -1,4 +1,4 @@
-uuid: 97f0c530-f62f-433e-b3b4-e212bd02d92a
+uuid: 08db2ab6-87b6-4135-a57e-bfb82da8f704
 langcode: en
 status: true
 dependencies: {  }
@@ -7,7 +7,7 @@ _core:
 id: feedback
 label: 'Website feedback'
 recipients:
-  - info@kt-session.io
+  - info@kt-session.wndrs
 reply: ''
 weight: 0
 message: 'Your message has been sent.'
