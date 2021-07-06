@@ -1,0 +1,14 @@
+# Source: https://www.drupal.org/docs/drupal-apis/routing-system/structure-of-routes
+kt_session.content:
+  # The path always starts with a leading forward-hash.
+  path: '/kt_session'
+  # Defines the default properties of a route.
+  defaults:
+    # For page callbacks that return a render array use _controller.
+    _controller: '\Drupal\kt_session\Controller\HomeController::content'
+    _title: 'KT Session Module Home Page and Menu Item'
+  # Require a permission to access the route
+  requirements:
+    # You can specify multiple permissions by separating them with ',' (comma)
+    # (e.g., _permission: 'access content,access user profiles')
+    _permission: 'access content'
