@@ -35,6 +35,7 @@
         "docs": "http://docs.drupalvm.com"
     },
     "require": {
+        "drupal/admin_toolbar": "^3.0",
         "drupal/pathauto": "^1.8",
         "drupal/redis": "~1.0",
         "drush/drush": "^10.0",
