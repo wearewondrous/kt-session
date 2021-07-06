@@ -1,5 +1,5 @@
 {
-  "name": "learner-kit",
+  "name": "kt-session",
   "version": "1.1.0",
   "description": "Learner Kit",
   "author": "WONDROUS LTD <hello@wondrous.ch> (https://www.wearewondrous.com)",
@@ -19,7 +19,7 @@
     "gulp": "./node_modules/.bin/gulp",
     "watch": "./node_modules/.bin/gulp watch",
     "d": "yarn run project-local-drush",
-    "ld": "yarn run d @learner-kit.local",
+    "ld": "yarn run d @kt-session.local",
     "up": "./vendor/bin/psh-toolbelt update:from-remote",
     "setup": "yarn composer && yarn && platform drush-aliases -r && vagrant up && yarn up --branch=master --db && yarn gulp"
   },
