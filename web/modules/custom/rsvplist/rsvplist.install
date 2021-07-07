@@ -1,0 +1,60 @@
+<?php
+function rsvplist_schema() {
+  $schema = [
+    'rsvplist' => [
+      'description' => 'Stores email, timestamp, nid and uid for an rsvp.',
+      'fields' => [
+        'id' => [
+          'description' => 'The primary identifier for the record.',
+          'type' => 'serial',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+        ],
+        'uid' => [
+          'description' => 'the {users}.uid that added this rsvp.',
+          'type' => 'int',
+          'default' => 0,
+          'not null' => TRUE,
+        ],
+        'nid' => [
+          'description' => 'the {node}.uid that added this rsvp.',
+          'type' => 'varchar',
+          'length' => 64,
+          'default' => 0,
+          'not null' => FALSE,
+        ],
+        'mail' => [
+          'description' => 'User\'s email address.',
+          'type' => 'varchar',
+          'length' => 64,
+          'default' => '',
+          'not null' => FALSE,
+        ],
+        'created' => [
+          'type' => 'int',
+          'not null' => TRUE,
+          'description' => 'Timestamp for when rsvp was created.',
+          'default' => 0,
+        ],
+      ],
+      'primary key' => ['id'],
+      'indexes' => [
+        'node' => ['id'],
+        'node_user' => ['nid', 'uid'],
+      ],
+    ],
+    'rsvplist_enabled' => [
+      'description' => 'Tracks whether rsvplist is enabled for a node.',
+      'fields' => [
+        'nid' => [
+          'description' => 'the {node}.nid that rsvplist enabled.',
+          'type' => 'int',
+          'default' => 0,
+          'not null' => TRUE,
+        ],
+      ],
+      'primary key' => ['nid'],
+    ],
+  ];
+  return $schema;
+}

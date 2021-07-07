@@ -6,26 +6,41 @@
 
 namespace Drupal\rsvplist\Form;
 
-use Drupal\Core\Database\Database;
+use Drupal\Core\Database\Connection;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\NodeInterface;
 use Drupal\Component\Utility\EmailValidator;
+use Drupal\Core\Session\AccountProxy;
+use Drupal\user\UserStorageInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Provides an RSVP Email form.
  */
 class RSVPForm extends FormBase {
+
   /**
    * @var EmailValidator $emailValidator
    */
   protected $emailValidator;
 
   /**
+   * @var Connection $database
+   */
+  protected $database;
+
+  /**
+   * @var UserStorageInterface $user
+   */
+  protected $user;
+
+  /**
    * (@inheritDoc)
    */
-  public function __construct(EmailValidator $emailValidator) {
+  public function __construct(EmailValidator $emailValidator, Connection $database, UserStorageInterface $user_storage) {
     $this->emailValidator = $emailValidator;
+    $this->database = $database;
+    $this->user = $user_storage;
   }
 
   /**
@@ -35,7 +50,9 @@ class RSVPForm extends FormBase {
     // Instantiates this form class.
     return new static(
       // Load the service required to construct this class.
-      $container->get('email.validator')
+      $container->get('email.validator'),
+      $container->get('database'),
+      $container->get('entity_type.manager')->getStorage('user')
     );
   }
 
@@ -90,7 +107,18 @@ class RSVPForm extends FormBase {
    * (@inheritDoc)
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $message = t('The form is working.');
+    $user = $this->user->load($this->currentUser()->id());
+
+    $fields = [
+      'mail' => $form_state->getValue('email'),
+      'mail' => $form_state->getValue('nid'),
+      'mail' => $user->id(),
+      'mail' => time(),
+    ];
+
+    $this->database->insert('rsvplist')->fields($fields)->execute();
+
+    $message = t('Thank you for your RSVP, you are on the list for the event.');
     \Drupal::messenger()->addMessage($message);
   }
 }
