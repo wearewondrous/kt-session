@@ -11,7 +11,9 @@ is_admin: false
 permissions:
   - 'access comments'
   - 'access content'
+  - 'access rsvplist report'
   - 'access site-wide contact form'
+  - 'administer rsvplist'
   - 'search content'
   - 'use text format restricted_html'
   - 'view rsvplist'
