@@ -72,15 +72,15 @@ class RSVPForm extends FormBase {
       $nid = $node->id();
     }
     $form['email'] = [
-      '#title' => t('Email Address'),
+      '#title' => $this->t('Email Address'),
       '#type' => 'textfield',
       '#size' => 25,
-      '#description' => t("We'll send updates to the email address you provided."),
+      '#description' => $this->t("We'll send updates to the email address you provided."),
       '#required' => TRUE,
     ];
     $form['submit'] = [
       '#type' => 'submit',
-      '#value' => t("RSVP"),
+      '#value' => $this->t("RSVP"),
     ];
     $form['nid'] = [
       '#type' => 'hidden',
@@ -98,7 +98,7 @@ class RSVPForm extends FormBase {
     // \Drupal::service() is not really handy for investigating isValid member function.
     // Let's use dependency injection to get it more portable and also debug friendly.
     if ($value == !$this->emailValidator->isValid($value)) {
-      $form_state->setErrorByName('email', t('The email address %mail is not valid.', ['%mail' => $value]));
+      $form_state->setErrorByName('email', $this->t('The email address %mail is not valid.', ['%mail' => $value]));
     }
   }
 
@@ -107,17 +107,16 @@ class RSVPForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $user = $this->user->load($this->currentUser()->id());
-
     $fields = [
       'mail' => $form_state->getValue('email'),
-      'mail' => $form_state->getValue('nid'),
-      'mail' => $user->id(),
-      'mail' => time(),
+      'nid' => $form_state->getValue('nid'),
+      'uid' => $user->id(),
+      'created' => time(),
     ];
 
     $this->database->insert('rsvplist')->fields($fields)->execute();
 
-    $message = t('Thank you for your RSVP, you are on the list for the event.');
+    $message = $this->t('Thank you for your RSVP, you are on the list for the event.');
     \Drupal::messenger()->addMessage($message);
   }
 }

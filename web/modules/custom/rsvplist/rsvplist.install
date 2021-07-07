@@ -11,7 +11,7 @@ function rsvplist_schema() {
           'not null' => TRUE,
         ],
         'uid' => [
-          'description' => 'the {users}.uid that added this rsvp.',
+          'description' => 'The {users}.uid that added this rsvp.',
           'type' => 'int',
           'default' => 0,
           'not null' => TRUE,

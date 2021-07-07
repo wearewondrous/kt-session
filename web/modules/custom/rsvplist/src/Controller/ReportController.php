@@ -23,7 +23,6 @@ class ReportController extends ControllerBase {
     $select->addField('n', 'title');
     $select->addField('r', 'mail');
     $entries = $select->execute()->fetchAll(\PDO::FETCH_ASSOC);
-    var_dump($entries);
     return $entries;
   }
 
